@@ -1,0 +1,24 @@
+name: Mise à jour automatique du Portail
+on:
+  schedule:
+    - cron: '0 0 * * *' 
+  workflow_dispatch: 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Installation des dépendances
+        run: |
+          pip install mkdocs-material mkdocs-macros-plugin
+
+      - name: Déploiement sur GitHub Pages
+        run: |
+          mkdocs gh-deploy --force

@@ -1,0 +1,54 @@
+site_name: Datalake Inria
+site_url: https://pit9111.github.io/test_accueil/
+
+theme:
+  name: material
+  language: fr
+  
+  # Images et Icônes
+  logo: https://api.iconify.design/hugeicons:database-02.svg?color=%23ffffff
+  favicon: https://api.iconify.design/hugeicons:database-02.svg?color=%2300005C
+  
+  # Fonctionnalités d'interface
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.instant
+    - navigation.sidebar.only
+    - toc.integrate
+    - content.code.copy
+
+  # Couleurs (Mode Clair et Sombre)
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Passer au mode sombre
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Passer au mode clair
+
+# Plugins actifs
+plugins:
+  - search
+  - macros
+
+# CSS Personnalisé
+extra_css:
+  - stylesheets/extra.css
+
+# Extensions Markdown
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - pymdownx.snippets:
+      base_path: ["docs"]
