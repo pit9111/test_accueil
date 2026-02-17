@@ -1,24 +1,45 @@
 name: Mise à jour automatique du Portail
+
 on:
+  # 1. Se lance à chaque fois que tu fais un "git push" sur la branche main
+  push:
+    branches:
+      - main
+  
+  # 2. Se lance tous les jours à minuit UTC (pour récupérer les mises à jour des README externes)
   schedule:
     - cron: '0 0 * * *' 
+  
+  # 3. Permet de lancer le déploiement manuellement depuis l'onglet Actions si besoin
   workflow_dispatch: 
+
+# Donne la permission au robot d'écrire sur la branche gh-pages
+permissions:
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
+      # Configure l'identité du robot pour qu'il puisse "signer" la mise à jour
+      - name: Configuration Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # Installe MkDocs, le thème Material ET le plugin Macros (très important pour ton script)
       - name: Installation des dépendances
         run: |
           pip install mkdocs-material mkdocs-macros-plugin
 
+      # Construit et déploie le site sur la branche gh-pages
       - name: Déploiement sur GitHub Pages
         run: |
           mkdocs gh-deploy --force
