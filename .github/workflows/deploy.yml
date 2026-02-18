@@ -8,7 +8,7 @@ on:
   
   # 2. Se lance tous les jours à minuit UTC (pour récupérer les mises à jour des README externes)
   schedule:
-    - cron: '0 0 * * *' 
+    - cron: '*/5 * * * *'
   
   # 3. Permet de lancer le déploiement manuellement depuis l'onglet Actions si besoin
   workflow_dispatch: 
@@ -34,7 +34,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # Installe MkDocs, le thème Material ET le plugin Macros (très important pour ton script)
+      # Installe MkDocs, le thème Material ET le plugin Macros
       - name: Installation des dépendances
         run: |
           pip install mkdocs-material mkdocs-macros-plugin
