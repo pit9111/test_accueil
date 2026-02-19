@@ -1,0 +1,16 @@
+:root {
+  --md-primary-fg-color: #ff0000;
+  --md-accent-fg-color: #00005C;
+}
+
+/* Force tous les boutons en bleu rempli */
+.md-button--primary {
+  background-color: #00005C !important;
+  border-color: #00005C !important;
+  color: #ffffff !important;
+}
+
+.md-button--primary:hover {
+  background-color: #ff0000 !important;
+  border-color: #ff0000 !important;
+}
