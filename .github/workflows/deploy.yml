@@ -8,7 +8,7 @@ on:
   
   # 2. Se lance tous les jours à minuit UTC (pour récupérer les mises à jour des README externes)
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/30 * * * *'
   
   # 3. Permet de lancer le déploiement manuellement depuis l'onglet Actions si besoin
   workflow_dispatch: 
