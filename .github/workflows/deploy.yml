@@ -1,25 +1,18 @@
 name: Mise à jour automatique du Portail
 
 on:
-  # 1. Se lance à chaque fois que tu fais un "git push" sur la branche main
-  push:
-    branches:
-      - main
-  
-  # 2. Se lance toutes les 30 minutes
+  # 1. Mise à jour automatique toutes les 30 minutes (UTC)
   schedule:
-    - cron: '*/30 * * * *'
-  
-  # 3. Permet de lancer le déploiement manuellement
-  workflow_dispatch: 
+    - cron: '*/5 * * * *'
 
-# Permissions nécessaires pour déployer sur GitHub Pages via les Actions
+  # 2. Permet de lancer le déploiement manuellement
+  workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Permet d'annuler un déploiement en cours si un nouveau est lancé
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -27,6 +20,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Récupération du code
         uses: actions/checkout@v4
@@ -38,29 +32,27 @@ jobs:
 
       - name: Installation des dépendances
         run: |
-          pip install mkdocs-material mkdocs-macros-plugin
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
-      # On remplace "gh-deploy" par "build" : on construit juste les fichiers dans le dossier "site/"
       - name: Construction du site MkDocs
-        run: |
-          mkdocs build
+        run: mkdocs build --strict
 
       - name: Configuration de GitHub Pages
         uses: actions/configure-pages@v4
 
-      # Cette action prend le dossier "site/" et le prépare pour l'envoi
       - name: Upload de l'artefact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './site'
+          path: ./site
 
-  # Nouveau Job qui s'occupe uniquement de la mise en ligne
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
+
     steps:
       - name: Déploiement sur GitHub Pages
         id: deployment
