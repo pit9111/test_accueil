@@ -3,7 +3,7 @@ name: Mise à jour automatique du Portail
 on:
   # 1. Mise à jour automatique toutes les 30 minutes (UTC)
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 2 * * *'
 
   # 2. Permet de lancer le déploiement manuellement
   workflow_dispatch:
