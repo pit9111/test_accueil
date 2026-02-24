@@ -6,12 +6,11 @@ theme:
   language: fr
   
   # Images et Icônes
-  logo: https://api.iconify.design/hugeicons:database-02.svg?color=%23ffffff
+  logo: logo_datalake.png
   favicon: https://api.iconify.design/hugeicons:database-02.svg?color=%2300005C
   
   # Fonctionnalités d'interface
   features:
-    - navigation.tabs
     - navigation.sections
     - navigation.instant
     - navigation.sidebar.only
