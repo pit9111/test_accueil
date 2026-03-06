@@ -72,5 +72,12 @@
 
 [Ouvrir le repo Github](https://github.com/Inria-datalake){ .md-button .md-button--primary target="_blank" }
 
+---
 
-test
+## Membres de l'équipe
+
+Voici les contributeurs de l'organisation Inria-Datalake :
+
+<br>
+
+{{ github_members("Inria-Datalake") }}
